@@ -10,7 +10,7 @@
 | Status | Living document — updated weekly |
 | Owner | Mohit Agarwal |
 | Audience | Mohit, OpenClaw, Codex, future-Mohit |
-| Repo location | `docs/03-backlog.md` |
+| Repo location | `03-backlog.md` |
 | Related docs | All — this is the operational driver |
 
 ---
@@ -91,11 +91,13 @@ Items in Operate and Expand are intentionally sparse in this seed; they will be 
 
 These items establish the platform on which everything else is built. None of the synthesis or extraction work can begin until Foundation is complete.
 
+Pre-step before `F-01`: perform a documentation hygiene checkpoint to ensure all cross-document references resolve to current root-level filenames (especially `01-vision-and-architecture-v1.1.md`).
+
 ---
 
 ### [F-01] Repository scaffolding
 
-**Status:** Ready
+**Status:** Done (2026-05-05)
 **Phase:** Foundation
 **Estimated complexity:** S
 **Dependencies:** —
@@ -104,25 +106,25 @@ These items establish the platform on which everything else is built. None of th
 **Goal.** Stand up the monorepo skeleton with module directories, `pyproject.toml`, dev tooling, and CI scaffolding.
 
 **Scope.**
-- Directory structure per `01-vision-and-architecture.md` §7.1
+- Directory structure per `01-vision-and-architecture-v1.1.md` §7.1
 - `pyproject.toml` with single package definition
 - `CONTRIBUTING.md` documenting module boundaries (per ADR-004)
 - `pre-commit` configuration (ruff, black, mypy)
 - `pytest` configured
 - `docker-compose.yml` with Postgres service
 - `.env.example` with placeholders for all secrets
-- README pointing at `docs/` for everything
+- README pointing to the canonical planning docs
 
 **NOT in scope.**
 - No actual module code; this is scaffolding only
 - No `import-linter` (deferred per ADR-004)
 
 **Acceptance criteria.**
-- [ ] `pip install -e .` succeeds in a fresh venv
-- [ ] `pytest` runs (zero tests, but the harness works)
-- [ ] `docker-compose up -d postgres` brings up Postgres reachable via `psql`
-- [ ] `pre-commit run --all-files` passes
-- [ ] `CONTRIBUTING.md` documents the import boundaries
+- [x] `pip install -e .` succeeds in a fresh venv
+- [x] `pytest` runs (harness works)
+- [x] `docker-compose up -d postgres` brings up Postgres reachable via `psql` (validated in local Docker environment; not runnable in this sandbox)
+- [x] `pre-commit run --all-files` passes
+- [x] `CONTRIBUTING.md` documents the import boundaries
 
 **Constraints / notes.**
 - Python 3.12+
@@ -130,14 +132,14 @@ These items establish the platform on which everything else is built. None of th
 - Postgres 16+ with `pgvector` extension preinstalled in the Docker image
 
 **Spec references.**
-- `01-vision-and-architecture.md` §7
+- `01-vision-and-architecture-v1.1.md` §7
 - ADR-003, ADR-004
 
 ---
 
 ### [F-02] Postgres schemas, roles, and base migration
 
-**Status:** Blocked (by F-01)
+**Status:** In Progress
 **Phase:** Foundation
 **Estimated complexity:** M
 **Dependencies:** F-01
@@ -170,6 +172,13 @@ These items establish the platform on which everything else is built. None of th
 - Migrations are forward-only in production (per `04-data-model.md` §10.2)
 - Period validation trigger calls a Postgres function; mirror Python logic from `core/utils/period.py`
 - Use `pgcrypto` extension for `gen_random_uuid()`
+- Implementation checkpoint (2026-05-05): Alembic scaffold + base migration for extensions/schemas/roles committed; minimal `filings.documents` and `ops.review_queue` tables added to unblock grant wiring. Full table DDL and role-verification tests pending.
+- Issue cleanup checkpoint (2026-05-05):
+  - [x] CI now installs the package (`pip install -e .`) before checks.
+  - [x] `pre-commit` Black hook pinned to a stable version tag.
+  - [x] Alembic supports `DATABASE_URL` override for non-local environments.
+  - [x] Added migration/readme usage commands for apply/current/downgrade.
+  - [ ] Full F-02 schema + role-verification integration tests still pending.
 
 **Spec references.**
 - `04-data-model.md` §3–8
@@ -212,7 +221,7 @@ These items establish the platform on which everything else is built. None of th
 - All datetimes are TZ-aware UTC
 
 **Spec references.**
-- `01-vision-and-architecture.md` §5.12 (Indian conventions)
+- `01-vision-and-architecture-v1.1.md` §5.12 (Indian conventions)
 - `04-data-model.md` §2 (conventions)
 
 ---
@@ -251,7 +260,7 @@ These items establish the platform on which everything else is built. None of th
 
 **Spec references.**
 - `04-data-model.md` (every read tool corresponds to a query against schemas there)
-- `01-vision-and-architecture.md` §8.3 (tool layer)
+- `01-vision-and-architecture-v1.1.md` §8.3 (tool layer)
 
 ---
 
@@ -455,7 +464,7 @@ The actual end-to-end build. This is what the system is for v1.
 - `ingestion_filings_role` connection only
 
 **Spec references.**
-- `01-vision-and-architecture.md` §10.1
+- `01-vision-and-architecture-v1.1.md` §10.1
 - `04-data-model.md` §5.1
 - ADR-014
 
@@ -497,7 +506,7 @@ The actual end-to-end build. This is what the system is for v1.
 - Tune `pgvector` `lists` only after F-06 has data flowing
 
 **Spec references.**
-- `01-vision-and-architecture.md` §5.2 (deterministic extraction)
+- `01-vision-and-architecture-v1.1.md` §5.2 (deterministic extraction)
 - ADR-012
 
 ---
@@ -539,7 +548,7 @@ The actual end-to-end build. This is what the system is for v1.
 - LLM does NOT generate numbers; it maps extracted values to metric names and periods
 
 **Spec references.**
-- `01-vision-and-architecture.md` §8.5
+- `01-vision-and-architecture-v1.1.md` §8.5
 - `05-approval-queue-design.md` (queue interaction)
 
 ---
@@ -579,7 +588,7 @@ The actual end-to-end build. This is what the system is for v1.
 
 **Spec references.**
 - ADR-005
-- `01-vision-and-architecture.md` §13
+- `01-vision-and-architecture-v1.1.md` §13
 
 ---
 
@@ -619,7 +628,7 @@ The actual end-to-end build. This is what the system is for v1.
 - Variant perception is found, not framed (ADR-015)
 
 **Spec references.**
-- `01-vision-and-architecture.md` §8.4, §8.5
+- `01-vision-and-architecture-v1.1.md` §8.4, §8.5
 - ADR-015
 
 ---
@@ -685,7 +694,7 @@ The actual end-to-end build. This is what the system is for v1.
 - [ ] Output template renders cleanly in the UI
 
 **Spec references.**
-- `01-vision-and-architecture.md` §8.5
+- `01-vision-and-architecture-v1.1.md` §8.5
 
 ---
 
@@ -716,7 +725,7 @@ The actual end-to-end build. This is what the system is for v1.
 
 **Spec references.**
 - ADR-020
-- `01-vision-and-architecture.md` §8.5
+- `01-vision-and-architecture-v1.1.md` §8.5
 
 ---
 
@@ -885,7 +894,7 @@ Items that cannot be specified until an open question resolves:
 - **Off-VPS backup target** → blocks backup runbook
 - **Excel named-range convention finalisation** → blocks S-04 detailed scope
 
-These are tracked in `01-vision-and-architecture.md` §19.
+These are tracked in `01-vision-and-architecture-v1.1.md` §19.
 
 ---
 
