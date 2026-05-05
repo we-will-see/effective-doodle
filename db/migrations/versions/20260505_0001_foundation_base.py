@@ -17,12 +17,8 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.execute(
-        "DO $$ BEGIN CREATE EXTENSION IF NOT EXISTS pgcrypto; EXCEPTION WHEN insufficient_privilege THEN RAISE NOTICE 'skip pgcrypto extension: insufficient privilege'; END $$;"
-    )
-    op.execute(
-        "DO $$ BEGIN CREATE EXTENSION IF NOT EXISTS vector; EXCEPTION WHEN insufficient_privilege THEN RAISE NOTICE 'skip vector extension: insufficient privilege'; END $$;"
-    )
+    op.execute("CREATE EXTENSION IF NOT EXISTS pgcrypto;")
+    op.execute("CREATE EXTENSION IF NOT EXISTS vector;")
 
     op.execute("CREATE SCHEMA IF NOT EXISTS coverage;")
     op.execute("CREATE SCHEMA IF NOT EXISTS filings;")
@@ -43,9 +39,6 @@ def upgrade() -> None:
     )
     op.execute(
         "DO $$ BEGIN CREATE ROLE web_role NOINHERIT; EXCEPTION WHEN duplicate_object THEN NULL; END $$;"
-    )
-    op.execute(
-        "DO $$ BEGIN ALTER ROLE ingestion_filings_role NOINHERIT; EXCEPTION WHEN insufficient_privilege THEN RAISE NOTICE 'skip role alter: insufficient privilege'; END $$;"
     )
 
     # Minimal tables required for role grants and workflow wiring in early F-02.

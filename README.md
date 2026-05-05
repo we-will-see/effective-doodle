@@ -33,4 +33,4 @@ The load-bearing principles are:
 
 ## Next Work
 
-Backlog item `F-02 Postgres schemas, roles, and base migration` is in progress.
+Proceed to backlog item `F-02 Postgres schemas, roles, and base migration`.

@@ -121,7 +121,6 @@ Pre-step before `F-01`: perform a documentation hygiene checkpoint to ensure all
 
 **Acceptance criteria.**
 - [x] `pip install -e .` succeeds in a fresh venv
-- [x] `pytest` runs (harness works)
 - [x] `docker-compose up -d postgres` brings up Postgres reachable via `psql` (validated in local Docker environment; not runnable in this sandbox)
 - [x] `pre-commit run --all-files` passes
 - [x] `CONTRIBUTING.md` documents the import boundaries
@@ -138,7 +137,6 @@ Pre-step before `F-01`: perform a documentation hygiene checkpoint to ensure all
 ---
 
 ### [F-02] Postgres schemas, roles, and base migration
-
 **Status:** In Progress
 **Phase:** Foundation
 **Estimated complexity:** M
