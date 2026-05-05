@@ -139,7 +139,7 @@ Pre-step before `F-01`: perform a documentation hygiene checkpoint to ensure all
 
 ### [F-02] Postgres schemas, roles, and base migration
 
-**Status:** In Progress
+**Status:** Ready
 **Phase:** Foundation
 **Estimated complexity:** M
 **Dependencies:** F-01
