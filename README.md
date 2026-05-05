@@ -2,7 +2,7 @@
 
 AgentOS is a personal research operating system for a single institutional sell-side pharma analyst. The v1 goal is a narrow vertical slice: BSE filing ingestion, deterministic numeric extraction, variance against Excel models, tiered approval, analyst review, and accepted writes into coverage tables.
 
-This repository is currently in the document-driven setup phase. It intentionally contains design and planning artifacts only. Do not add application code until the relevant backlog item is explicitly selected for implementation.
+This repository has completed initial scaffolding (`F-01`) and is now ready to begin schema and workflow implementation for the v1 vertical slice.
 
 ## Current Status
 
@@ -11,7 +11,7 @@ This repository is currently in the document-driven setup phase. It intentionall
 - Backlog: seeded for Foundation, Slice, Operate, and deferred Expand work
 - Data model: drafted
 - Approval queue design: drafted
-- Application code: not started
+- Application code: scaffolding created (`F-01`), feature modules not implemented
 
 ## Build Rule
 
@@ -33,4 +33,4 @@ The load-bearing principles are:
 
 ## Next Work
 
-Start with backlog item `F-01 Repository scaffolding`, but only after confirming the implementation scope. F-01 may create code/project scaffolding; this setup commit does not.
+Backlog item `F-02 Postgres schemas, roles, and base migration` is in progress.

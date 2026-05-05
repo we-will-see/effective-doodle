@@ -10,8 +10,8 @@
 | Status | Living document — append only |
 | Owner | Mohit Agarwal |
 | Audience | Mohit, OpenClaw, Codex, future-Mohit |
-| Repo location | `docs/02-decision-log.md` |
-| Related docs | `01-vision-and-architecture.md`, all subsequent docs |
+| Repo location | `02-decision-log.md` |
+| Related docs | `01-vision-and-architecture-v1.1.md`, all subsequent docs |
 
 ---
 
@@ -496,7 +496,7 @@ Application connections use the appropriate role per service.
 **Decision.** Documentation structure:
 
 **Living docs (always current):**
-- `01-vision-and-architecture.md`
+- `01-vision-and-architecture-v1.1.md`
 - `02-decision-log.md`
 - `03-backlog.md`
 - `04-data-model.md`
@@ -709,7 +709,7 @@ When a ceiling is hit, the agent surfaces the partial state and exits with statu
 - Hours saved (self-report against pre-system baseline)
 - Hours redirected (to channel work, client conversations, proprietary research)
 
-Targets in `01-vision-and-architecture.md` §14.2. If steady-state crosses 8 hours/week of total system overhead for two consecutive months, pause feature work and simplify.
+Targets in `01-vision-and-architecture-v1.1.md` §14.2. If steady-state crosses 8 hours/week of total system overhead for two consecutive months, pause feature work and simplify.
 
 **Alternatives considered.** No tracking (original); only build hours; only hours saved.
 
