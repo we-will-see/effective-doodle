@@ -34,4 +34,11 @@ A work item is done only when:
 
 ## Repository Boundaries
 
-The planned monorepo module boundaries are documented in the architecture and backlog. Until `F-01` is implemented, avoid creating project structure opportunistically. Let `F-01` create the first code-facing scaffold in one focused change.
+The monorepo module boundaries are documented in the architecture and backlog. `F-01` established the scaffold; follow these constraints:
+
+- Keep shared contracts and reusable primitives in `core/`.
+- Keep ingestion source-specific code under `ingestion/<source>/`.
+- Keep deterministic extraction logic under `extraction/`.
+- Keep agent workflow logic under `agents/<workflow>/`.
+- Route database schema and role changes through `db/migrations/` and `db/roles/`.
+- Mirror runtime module boundaries in `tests/`.

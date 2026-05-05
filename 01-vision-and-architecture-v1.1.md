@@ -10,7 +10,7 @@
 | Status | Draft for review |
 | Owner | Mohit Agarwal |
 | Audience | Mohit, OpenClaw, Codex, future-Mohit |
-| Repo location | `docs/01-vision-and-architecture.md` |
+| Repo location | `01-vision-and-architecture-v1.1.md` |
 | Supersedes | v1.0 |
 | Related docs | `02-decision-log.md`, `03-backlog.md`, `04-data-model.md`, `05-approval-queue-design.md`, `06-eval-harness-design.md`, `module-charters/` (lazy), `runbooks/` (lazy), `prompt-library.md` (lazy) |
 | Major changes from v1.0 | Stripped four-plane formalism; cut agents to v1 set of four; added daily briefing workflow; deferred modeling engine to v2 with Excel-as-source-of-truth for v1; locked Visible Alpha as consensus source; added three-layer provenance; added Indian-conventions richness (corporate actions, accounting policies, consolidation basis); demoted OpenClaw from "kernel" to "orchestrator"; removed Codex-as-Builder role framing; deferred Valuepickr/Telegram/news to post-slice; added attention budget; reordered variant-perception in synthesis sequence; committed to vertical-slice-first build philosophy |
@@ -360,7 +360,7 @@ agentos/
 ├── evals/                    # golden set + harness
 ├── scripts/                  # ad-hoc admin scripts
 ├── tests/                    # mirrors module structure
-├── docs/                     # all design and tracking documents
+├── *.md                      # design and tracking documents (currently root-level; may move under docs/ during scaffolding)
 ├── pyproject.toml
 ├── docker-compose.yml
 ├── CONTRIBUTING.md           # module boundary documentation
@@ -865,7 +865,7 @@ Monthly during the cost/attention review. New risks added as encountered.
 
 | Doc | Purpose | Status |
 | --- | --- | --- |
-| `01-vision-and-architecture.md` | This document | v1.1 draft |
+| `01-vision-and-architecture-v1.1.md` | This document | v1.1 draft |
 | `02-decision-log.md` | Architectural decisions and rationale | To draft (seed entries from this doc) |
 | `03-backlog.md` | Active work items, ranked, Codex-ready | To populate from §11.2 sequence |
 | `04-data-model.md` | Full schema (coverage + filings + ops merged), three-layer provenance | To draft |
