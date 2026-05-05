@@ -10,7 +10,7 @@
 | Status | Draft for review |
 | Owner | Mohit Agarwal |
 | Audience | Mohit, OpenClaw, Codex, future-Mohit |
-| Repo location | `docs/04-data-model.md` |
+| Repo location | `04-data-model.md` |
 | Related ADRs | ADR-002, ADR-005, ADR-011, ADR-013, ADR-014, ADR-022, ADR-025, ADR-026 |
 
 ---

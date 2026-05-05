@@ -10,7 +10,7 @@
 | Status | Draft for review |
 | Owner | Mohit Agarwal |
 | Audience | Mohit, OpenClaw, Codex, future-Mohit |
-| Repo location | `docs/05-approval-queue-design.md` |
+| Repo location | `05-approval-queue-design.md` |
 | Related ADRs | ADR-010 (tiered queue), ADR-024 (rejection taxonomy), ADR-026 (blast-radius tooling) |
 
 ---

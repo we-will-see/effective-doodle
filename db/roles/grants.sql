@@ -1,0 +1,2 @@
+-- Placeholder grants file; full grants added in F-02.
+-- Keep this file present so migration tooling can re-apply grants.
