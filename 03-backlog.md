@@ -172,6 +172,7 @@ Pre-step before `F-01`: perform a documentation hygiene checkpoint to ensure all
 - Migrations are forward-only in production (per `04-data-model.md` §10.2)
 - Period validation trigger calls a Postgres function; mirror Python logic from `core/utils/period.py`
 - Use `pgcrypto` extension for `gen_random_uuid()`
+- Implementation checkpoint (2026-05-05): Alembic scaffold + base migration for extensions/schemas/roles committed; minimal `filings.documents` and `ops.review_queue` tables added to unblock grant wiring. Full table DDL and role-verification tests pending.
 
 **Spec references.**
 - `04-data-model.md` §3–8
