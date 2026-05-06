@@ -41,8 +41,8 @@ class Company(Base):
     created_by: Mapped[str] = mapped_column(Text, nullable=False)
     last_updated_by: Mapped[Optional[str]] = mapped_column(Text)
 
-    financials = relationship(back_populates="company")
-    documents = relationship(back_populates="company")
+    financials: Mapped[list["Financial"]] = relationship(back_populates="company")
+    documents: Mapped[list["Document"]] = relationship(back_populates="company")
 
 
 class WorkflowRun(Base):
@@ -67,8 +67,8 @@ class WorkflowRun(Base):
     parent_run_id: Mapped[Optional[uuid.UUID]] = mapped_column(ForeignKey("ops.workflow_runs.id"))
     created_at: Mapped[datetime] = tz_now()
 
-    parent_run = relationship(remote_side="WorkflowRun.id", back_populates="child_runs")
-    child_runs = relationship(back_populates="parent_run")
+    parent_run: Mapped[Optional["WorkflowRun"]] = relationship(remote_side="WorkflowRun.id", back_populates="child_runs")
+    child_runs: Mapped[list["WorkflowRun"]] = relationship(back_populates="parent_run")
 
 
 class SourceProvenance(Base):
@@ -117,7 +117,7 @@ class ClaimProvenance(Base):
     synthesised_at: Mapped[datetime] = tz_now()
     notes: Mapped[Optional[str]] = mapped_column(Text)
 
-    workflow_run = relationship()
+    workflow_run: Mapped[Optional["WorkflowRun"]] = relationship()
 
 
 class Financial(Base):
@@ -150,7 +150,7 @@ class Financial(Base):
     created_by: Mapped[str] = mapped_column(Text, nullable=False)
     last_updated_by: Mapped[Optional[str]] = mapped_column(Text)
 
-    company = relationship(back_populates="financials")
+    company: Mapped["Company"] = relationship(back_populates="financials")
 
 
 class Document(Base):
@@ -180,7 +180,7 @@ class Document(Base):
     is_material: Mapped[Optional[bool]] = mapped_column(Boolean)
     notes: Mapped[Optional[str]] = mapped_column(Text)
 
-    company = relationship(back_populates="documents")
+    company: Mapped["Company"] = relationship(back_populates="documents")
 
 
 class ParsedVersion(Base):
