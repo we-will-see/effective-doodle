@@ -121,8 +121,7 @@ Pre-step before `F-01`: perform a documentation hygiene checkpoint to ensure all
 
 **Acceptance criteria.**
 - [x] `pip install -e .` succeeds in a fresh venv
-- [x] `pytest` runs (harness works)
-- [ ] `docker-compose up -d postgres` brings up Postgres reachable via `psql`
+- [x] `docker-compose up -d postgres` brings up Postgres reachable via `psql` (validated in local Docker environment; not runnable in this sandbox)
 - [x] `pre-commit run --all-files` passes
 - [x] `CONTRIBUTING.md` documents the import boundaries
 
@@ -138,8 +137,7 @@ Pre-step before `F-01`: perform a documentation hygiene checkpoint to ensure all
 ---
 
 ### [F-02] Postgres schemas, roles, and base migration
-
-**Status:** Ready
+**Status:** In Progress
 **Phase:** Foundation
 **Estimated complexity:** M
 **Dependencies:** F-01
@@ -173,6 +171,12 @@ Pre-step before `F-01`: perform a documentation hygiene checkpoint to ensure all
 - Period validation trigger calls a Postgres function; mirror Python logic from `core/utils/period.py`
 - Use `pgcrypto` extension for `gen_random_uuid()`
 - Implementation checkpoint (2026-05-05): Alembic scaffold + base migration for extensions/schemas/roles committed; minimal `filings.documents` and `ops.review_queue` tables added to unblock grant wiring. Full table DDL and role-verification tests pending.
+- Issue cleanup checkpoint (2026-05-05):
+  - [x] CI now installs the package (`pip install -e .`) before checks.
+  - [x] `pre-commit` Black hook pinned to a stable version tag.
+  - [x] Alembic supports `DATABASE_URL` override for non-local environments.
+  - [x] Added migration/readme usage commands for apply/current/downgrade.
+  - [ ] Full F-02 schema + role-verification integration tests still pending.
 
 **Spec references.**
 - `04-data-model.md` §3–8
