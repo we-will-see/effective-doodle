@@ -1,2 +1,1 @@
-"""Streamlit pages for the review queue."""
-
+"""UI pages."""
