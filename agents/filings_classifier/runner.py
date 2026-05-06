@@ -14,6 +14,7 @@ from sqlalchemy.orm import Session
 
 from agents.filings_classifier.config import FilingsClassifierConfig, load_config
 from agents.filings_classifier.output import ClassificationResult, ClassifiedFinancial, SourceProvenanceRef
+from agents.variance_analysis import run_variance_analysis
 from core.types.sqlalchemy_models import Classification, Document, ReviewQueue, WorkflowRun
 from core.utils.logging import log_tool_call
 
@@ -194,13 +195,23 @@ class FilingsClassifierRunner:
                 document.materiality_score = classification.materiality_score
                 document.is_material = classification.materiality_score >= Decimal("0.5")
 
-                results.append(
-                    {
-                        "document_id": str(document.id),
-                        "document_type": classification.document_type,
-                        "queued_financial_rows": len(classification.extracted_financials),
-                    }
-                )
+                detail: dict[str, Any] = {
+                    "document_id": str(document.id),
+                    "document_type": classification.document_type,
+                    "queued_financial_rows": len(classification.extracted_financials),
+                }
+                if classification.document_type in {"results_announcement", "earnings_release"}:
+                    try:
+                        variance_result = run_variance_analysis(db_session, document.id)
+                        detail["variance_analysis"] = {
+                            "queue_item_id": variance_result["queue_item_id"],
+                            "variant_perception": variance_result["variant_perception"],
+                        }
+                    except Exception as variance_exc:
+                        logger.exception("variance analysis failed for document %s", document.id)
+                        detail["variance_analysis_error"] = str(variance_exc)
+
+                results.append(detail)
             except Exception as exc:
                 logger.exception("filings classifier failed for document %s", document.id)
                 results.append({"document_id": str(document.id), "error": str(exc)})
